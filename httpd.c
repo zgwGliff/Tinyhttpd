@@ -111,7 +111,9 @@ void accept_request(void *arg)
     sprintf(path, "htdocs%s", url);
     if (path[strlen(path) - 1] == '/')
         strcat(path, "index.html");
-    if (stat(path, &st) == -1) {
+    if (stat(path, &st) == -1) { 
+        perror("1 error");
+        printf("%s\n", path); 
         while ((numchars > 0) && strcmp("\n", buf))  /* read & discard headers */
             numchars = get_line(client, buf, sizeof(buf));
         not_found(client);
@@ -219,7 +221,7 @@ void execute_cgi(int client, const char *path,
     char c;
     int numchars = 1;
     int content_length = -1;
-
+        
     buf[0] = 'A'; buf[1] = '\0';
     if (strcasecmp(method, "GET") == 0)
         while ((numchars > 0) && strcmp("\n", buf))  /* read & discard headers */
@@ -402,7 +404,7 @@ void serve_file(int client, const char *filename)
     FILE *resource = NULL;
     int numchars = 1;
     char buf[1024];
-
+    
     buf[0] = 'A'; buf[1] = '\0';
     while ((numchars > 0) && strcmp("\n", buf))  /* read & discard headers */
         numchars = get_line(client, buf, sizeof(buf));

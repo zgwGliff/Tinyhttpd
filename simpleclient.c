@@ -26,12 +26,15 @@ int main(int argc, char *argv[])
         exit(1);
     }
     
-    sprintf(buf, "hello!I am client.\r\n");
+    sprintf(buf, "GET /\r\n test\n\n");
     write(sockfd, buf, strlen(buf));
     
-    read(sockfd, buf, sizeof(buf));
+    ssize_t n = 1;
+    while (n > 0) {
+        n = read(sockfd, buf, sizeof(buf));
+        printf("%s", buf);
+    }
 
-    printf("%s\0", buf);
     close(sockfd);
     exit(0);
 }

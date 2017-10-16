@@ -10,6 +10,9 @@ Compile for Linux
   3) Comment out the two lines that run pthread_create().
   4) Uncomment the line that runs accept_request().
   5) Remove -lsocket from the Makefile.
+  6) check the use of intptr_t in line 57
+  7) sudo chmod 764 color.cgi check.cgi
+  8) optional: sudo ln -s /usr/local/bin/perl /usr/bin/perl
 ```
 
 <p>&nbsp; &nbsp; &nbsp;每个函数的作用：</p>
